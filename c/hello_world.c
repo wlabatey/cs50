@@ -1,3 +1,5 @@
+// Prompts user for name and then prints hello <name>.
+
 #include <cs50.h>
 #include <stdio.h>
 
