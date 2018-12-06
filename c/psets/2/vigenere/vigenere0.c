@@ -31,16 +31,15 @@ void to_lower(string str)
     }
 }
 
-void encrypt_string(string plaintext, char ciphertext[], string key, int length)
+void encrypt_string(string plaintext, string key, int length)
 {
     to_lower(key);
     int ascii_shift = 0;
     int j = 0;
     int k = 0;
     int k_len = strlen(key);
-    // TODO: Fix odd bug that seems to print out garbage values only on some lengths of plaintext.
-    // e.g. key = abc, plaintext = helloworld,
-    // but not with key = abc, plaintext = hello
+    printf("ciphertext: ");
+
     for (int i = 0; i < length; i++)
     {
         if (isalpha(plaintext[i]))
@@ -56,15 +55,16 @@ void encrypt_string(string plaintext, char ciphertext[], string key, int length)
 
             j = k % k_len;
             int key_val = (key[j] - 97) % 26;
-            ciphertext[i] = (((plaintext[i] + key_val) - ascii_shift) % 26) + ascii_shift;
+            char c = (((plaintext[i] + key_val) - ascii_shift) % 26) + ascii_shift;
+            printf("%c", c);
             k++;
         }
         else
         {
-            ciphertext[i] = plaintext[i];
+            printf("%c", plaintext[i]);
         }
     }
-    ciphertext[length+1] = '\0';
+    printf("\n");
 }
 
 int main(int argc, char *argv[])
@@ -78,9 +78,7 @@ int main(int argc, char *argv[])
     string key = argv[1];
     string plaintext = get_string("plaintext: ");
     int length = strlen(plaintext);
-    char ciphertext[length];
-    encrypt_string(plaintext, ciphertext, key, length);
+    encrypt_string(plaintext, key, length);
 
-    printf("ciphertext: %s\n", ciphertext);
     return 0;
 }
