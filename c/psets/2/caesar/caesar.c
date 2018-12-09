@@ -6,19 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char *argv[])
+void encrypt_string(string plaintext, char ciphertext[], int length, int shift)
 {
-    if (argc != 2)
-    {
-        printf("Usage: %s k\n", argv[0]);
-        return 1;
-    }
-
-    int shift = atoi(argv[1]);
-    string plaintext = get_string("plaintext: ");
-    int length = strlen(plaintext);
-    char ciphertext[length];
-
     // Loop through plaintext string
     for (int i = 0; i < length; i++)
     {
@@ -38,6 +27,23 @@ int main(int argc, char *argv[])
             ciphertext[i] = plaintext[i] + shift;
         }
     }
+    ciphertext[length+1] = '\0';
+}
+
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        printf("Usage: %s k\n", argv[0]);
+        return 1;
+    }
+
+    int shift = atoi(argv[1]);
+    string plaintext = get_string("plaintext: ");
+    int length = strlen(plaintext);
+    char ciphertext[length+1];
+
+    encrypt_string(plaintext, ciphertext, length, shift);
 
     printf("ciphertext: %s\n", ciphertext);
     return 0;
