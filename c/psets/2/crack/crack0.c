@@ -1,6 +1,8 @@
 // Simple implementation of a password cracker in C.
 // Cracks DES encrypted alphabetical passwords up to 5 characters in length.
 
+// First attempt.
+
 // Needed for unistd.h. Check `man crypt` for details.
 #define _XOPEN_CRYPT
 
