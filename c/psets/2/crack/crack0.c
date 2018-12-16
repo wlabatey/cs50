@@ -1,6 +1,7 @@
 // Simple implementation of a password cracker in C.
 // Cracks DES encrypted alphabetical passwords up to 5 characters in length.
 
+// Needed for unistd.h. Check `man crypt` for details.
 #define _XOPEN_CRYPT
 
 #include <unistd.h>
@@ -10,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Add all the chars we want to look for into an array.
 char keyspace[53] =
 {
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
@@ -19,8 +21,11 @@ char keyspace[53] =
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '\0'
 };
 
+// Exclude the ending NUL byte.
 int keyspace_len = 52;
 
+// Define the known salt to look for.
+// NOTE: This will not work for any passwords using a salt other than '50'. Fixed in crack1.c
 const char salt[3] = {'5', '0', '\0'};
 
 int crack_pass(char hash[], int length)
