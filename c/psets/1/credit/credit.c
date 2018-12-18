@@ -46,6 +46,7 @@ void validate_card_number(long long *card_number, char *card_type)
         else
         {
             int digit = ((int) card_buffer[i] - '0') * 2;
+
             if (digit > 9)
             {
                 char digit_buffer[3];
@@ -57,6 +58,7 @@ void validate_card_number(long long *card_number, char *card_type)
                     {
                         break;
                     }
+
                     total_odd += ((int) digit_buffer[i] - '0');
                 }
             }
